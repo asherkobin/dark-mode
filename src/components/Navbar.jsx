@@ -13,10 +13,10 @@ const Navbar = ({darkMode, setDarkMode, coinNames}) => {
       <h1>Crypto Tracker</h1>
       { 
         coinNames.map(name => 
-          <NavLink key={name}
-            style={{ textDecoration: "none", fontSize: "20px" }} 
-            activeStyle={{ textDecoration: "underline", fontWeight: "bold" }} 
-            to={`/${name}`}>{name}</NavLink>)
+          <NavLink key={name} exact
+            style={{ textDecoration: "none", fontSize: "20px", color: darkMode ? "white" : "black" }} 
+            activeStyle={{ textDecoration: "underline", fontWeight: "bold", color: darkMode ? "white" : "black" }} 
+            to={`/${name.replace("/", "_")}`}>{name}</NavLink>)
       }
       <div className="dark-mode__toggle">
         <div

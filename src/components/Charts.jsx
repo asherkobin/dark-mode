@@ -1,29 +1,23 @@
 import React from "react";
-import Chart from "./Chart";
 import { Switch, Route, Redirect } from "react-router-dom";
+import ChartContainer from "./ChartContainer";
 
-const Charts = ({ coinData, darkMode, setDarkMode }) => {
+const Charts = ({ coinData, darkMode }) => {
   return (
     <div className="charts">
       <Switch>
       {
-        coinData.map(coin => (
-          <Route path={`/${coin.name}`}>
-            <div className="chart__container" key={coin.name}>
-              <h2 className="coin__title">{coin.name}</h2>
-              <h4 className="coin__symbol">{coin.symbol}</h4>
-              <div className="coin__logo">
-                <img src={coin.image} height="40" alt={coin.name} />
-              </div>
-              <Chart sparklineData={coin.sparkline_in_7d.price} darkMode={darkMode} />
-            </div>
+        coinData.map(coinInfo => (
+          <Route path={`/${coinInfo.name.replace("/", "_")}`} exact key={coinInfo.name}>
+            <ChartContainer coinInfo={coinInfo} darkMode={darkMode} />
           </Route>))
       }
       {
-        coinData.length > 0 ? <Route to="/" exact><Redirect to={`/${coinData[0].name}`} /></Route> : <div>Loading...</div>
+        <Route to="/" exact><div style={{ fontSize: "20px", marginTop: "20px" }}>Select a Coin from the Navigation</div></Route>
       }
       </Switch>
     </div>
   );
 };
+
 export default Charts;
