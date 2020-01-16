@@ -12,8 +12,8 @@ const Navbar = ({darkMode, setDarkMode, coinNames}) => {
     <nav className="navbar">
       <h1>Crypto Tracker</h1>
       { 
-        coinNames.map((name, idx) => 
-          <NavLink 
+        coinNames.map(name => 
+          <NavLink key={name}
             style={{ textDecoration: "none", fontSize: "20px" }} 
             activeStyle={{ textDecoration: "underline", fontWeight: "bold" }} 
             to={`/${name}`}>{name}</NavLink>)
